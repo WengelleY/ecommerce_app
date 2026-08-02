@@ -20,9 +20,23 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final productProvider = context.watch<ProductProvider>();
+
     return Scaffold(
       appBar: AppBar(title: const Text("Products")),
-      body: const Center(child: Text("Loading products...")),
+
+      body: ListView.builder(
+        itemCount: productProvider.products.length,
+
+        itemBuilder: (context, index) {
+          final product = productProvider.products[index];
+
+          return ListTile(
+            title: Text(product.title),
+            subtitle: Text("\$${product.price}"),
+          );
+        },
+      ),
     );
   }
 }
