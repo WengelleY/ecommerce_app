@@ -25,18 +25,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("Products")),
 
-      body: ListView.builder(
-        itemCount: productProvider.products.length,
+      body: productProvider.isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: productProvider.products.length,
 
-        itemBuilder: (context, index) {
-          final product = productProvider.products[index];
+              itemBuilder: (context, index) {
+                final product = productProvider.products[index];
 
-          return ListTile(
-            title: Text(product.title),
-            subtitle: Text("\$${product.price}"),
-          );
-        },
-      ),
+                return ListTile(
+                  title: Text(product.title),
+                  subtitle: Text("\$${product.price}"),
+                );
+              },
+            ),
     );
   }
 }
