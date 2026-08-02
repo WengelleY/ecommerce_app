@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'services/api_service.dart';
+import 'package:provider/provider.dart';
+
+import 'providers/product_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => ProductProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -10,12 +17,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ApiService apiService = ApiService();
-
-    apiService.getProducts();
-
     return const MaterialApp(
-      home: Scaffold(body: Center(child: Text("Check Console"))),
+      home: Scaffold(body: Center(child: Text("E-Commerce App"))),
     );
   }
 }
