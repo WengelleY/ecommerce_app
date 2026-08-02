@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/product_provider.dart';
+import 'screens/home_screen.dart';
 
 void main() {
   runApp(
@@ -17,8 +18,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text("E-Commerce App"))),
-    );
+    return const MaterialApp(home: HomeScreen());
   }
 }
