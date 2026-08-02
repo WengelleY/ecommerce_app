@@ -1,22 +1,25 @@
 import 'package:dio/dio.dart';
+
 import '../models/product.dart';
 
 class ApiService {
-  final Dio _dio = Dio();
+  final Dio dio = Dio();
 
-  Future<void> getProducts() async {
+  Future<List<Product>> getProducts() async {
     try {
-      final response = await _dio.get('https://fakestoreapi.com/products');
+      final response = await dio.get('https://fakestoreapi.com/products');
 
       final List productsJson = response.data;
 
-      for (var productJson in productsJson) {
-        Product product = Product.fromJson(productJson);
+      List<Product> products = [];
 
-        print(product.title);
+      for (var productJson in productsJson) {
+        products.add(Product.fromJson(productJson));
       }
+
+      return products;
     } catch (e) {
-      print('Error: $e');
+      throw Exception("Failed to fetch products: $e");
     }
   }
 }
