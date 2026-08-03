@@ -1,13 +1,19 @@
+import 'package:ecommerce_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'providers/auth_provider.dart';
 import 'providers/product_provider.dart';
 import 'screens/home_screen.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ProductProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
+
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+
       child: const MyApp(),
     ),
   );
@@ -18,6 +24,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeScreen());
+    return const MaterialApp(home: LoginScreen());
   }
 }
