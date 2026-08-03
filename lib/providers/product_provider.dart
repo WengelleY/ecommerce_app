@@ -8,18 +8,20 @@ class ProductProvider extends ChangeNotifier {
 
   List<Product> _products = [];
   bool _isLoading = false;
-
+  String? _errorMessage;
   List<Product> get products => _products;
   bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
 
   Future<void> fetchProducts() async {
     _isLoading = true;
+    _errorMessage = null;
     notifyListeners();
 
     try {
       _products = await _apiService.getProducts();
     } catch (e) {
-      print(e);
+      _errorMessage = "Failed to load products.";
     }
 
     _isLoading = false;

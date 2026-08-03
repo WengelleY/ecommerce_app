@@ -27,6 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: productProvider.isLoading
           ? const Center(child: CircularProgressIndicator())
+          : productProvider.errorMessage != null
+          ? Center(child: Text(productProvider.errorMessage!))
           : ListView.builder(
               itemCount: productProvider.products.length,
 
