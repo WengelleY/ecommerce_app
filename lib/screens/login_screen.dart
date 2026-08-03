@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:ecommerce_app/screens/home_screen.dart';
 import '../providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -59,12 +59,20 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: authProvider.isLoading
                   ? null
-                  : () {
-                      context.read<AuthProvider>().login(
+                  : () async {
+                      await context.read<AuthProvider>().login(
                         usernameController.text,
-
                         passwordController.text,
                       );
+
+                      if (authProvider.token != null) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomeScreen(),
+                          ),
+                        );
+                      }
                     },
 
               child: authProvider.isLoading
