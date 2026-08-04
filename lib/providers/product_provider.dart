@@ -13,12 +13,29 @@ class ProductProvider extends ChangeNotifier {
 
   String? _errorMessage;
 
+  String _selectedCategory = "all";
+
   // Getters
+
   List<Product> get products => _products;
 
   bool get isLoading => _isLoading;
 
   String? get errorMessage => _errorMessage;
+
+  String get selectedCategory => _selectedCategory;
+
+  // Filtered products getter
+
+  List<Product> get filteredProducts {
+    if (_selectedCategory == "all") {
+      return _products;
+    }
+
+    return _products
+        .where((product) => product.category == _selectedCategory)
+        .toList();
+  }
 
   Future<void> fetchProducts() async {
     // Start loading
@@ -39,6 +56,12 @@ class ProductProvider extends ChangeNotifier {
 
     // Stop loading
     _isLoading = false;
+
+    notifyListeners();
+  }
+
+  void changeCategory(String category) {
+    _selectedCategory = category;
 
     notifyListeners();
   }
