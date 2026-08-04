@@ -4,8 +4,7 @@ import 'package:provider/provider.dart';
 import 'providers/auth_provider.dart';
 import 'providers/product_provider.dart';
 
-import 'screens/login_screen.dart';
-import 'screens/home_screen.dart';
+import 'core/router/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,14 +30,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductProvider()),
       ],
 
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
 
         title: "E-Commerce App",
 
-        home: authProvider.token != null
-            ? const HomeScreen()
-            : const LoginScreen(),
+        routerConfig: appRouter,
       ),
     );
   }
