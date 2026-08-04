@@ -15,13 +15,13 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    // Tell provider to fetch products once
+    // Fetch products once when screen opens
     context.read<ProductProvider>().fetchProducts();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Listen for provider changes
+    // Listen for provider updates
     final productProvider = context.watch<ProductProvider>();
 
     return Scaffold(
@@ -32,32 +32,70 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildBody(ProductProvider productProvider) {
-    // 1. Loading state
+    // Loading state
     if (productProvider.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    // 2. Error state
+    // Error state
     if (productProvider.errorMessage != null) {
       return Center(child: Text(productProvider.errorMessage!));
     }
 
-    // 3. Empty state
+    // Empty state
     if (productProvider.products.isEmpty) {
       return const Center(child: Text("No products available"));
     }
 
-    // 4. Success state
+    // Success state
     return ListView.builder(
       itemCount: productProvider.products.length,
 
       itemBuilder: (context, index) {
         final product = productProvider.products[index];
 
-        return ListTile(
-          title: Text(product.title),
+        return Card(
+          margin: const EdgeInsets.all(10),
 
-          subtitle: Text("\$${product.price}"),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Image.network(
+                  product.image,
+
+                  height: 180,
+
+                  width: double.infinity,
+
+                  fit: BoxFit.contain,
+                ),
+
+                const SizedBox(height: 12),
+
+                Text(
+                  product.title,
+
+                  style: const TextStyle(
+                    fontSize: 18,
+
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                Text(
+                  "\$${product.price}",
+
+                  style: const TextStyle(fontSize: 16, color: Colors.green),
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
