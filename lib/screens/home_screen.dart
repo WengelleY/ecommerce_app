@@ -28,6 +28,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+
+            child: TextField(
+              decoration: const InputDecoration(
+                hintText: "Search products...",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+              ),
+
+              onChanged: (value) {
+                productProvider.searchProducts(value);
+              },
+            ),
+          ),
+
           _buildCategories(productProvider),
 
           Expanded(child: _buildBody(productProvider)),

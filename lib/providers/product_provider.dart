@@ -15,6 +15,8 @@ class ProductProvider extends ChangeNotifier {
 
   String _selectedCategory = "all";
 
+  String _searchQuery = "";
+
   // Getters
 
   List<Product> get products => _products;
@@ -25,16 +27,30 @@ class ProductProvider extends ChangeNotifier {
 
   String get selectedCategory => _selectedCategory;
 
+  String get searchQuery => _searchQuery;
+
   // Filtered products getter
 
   List<Product> get filteredProducts {
-    if (_selectedCategory == "all") {
-      return _products;
+    List<Product> filtered = _products;
+
+    // Filter by category
+    if (_selectedCategory != "all") {
+      filtered = filtered
+          .where((product) => product.category == _selectedCategory)
+          .toList();
     }
 
-    return _products
-        .where((product) => product.category == _selectedCategory)
-        .toList();
+    // Filter by search
+    if (_searchQuery.isNotEmpty) {
+      filtered = filtered
+          .where(
+            (product) => product.title.toLowerCase().contains(_searchQuery),
+          )
+          .toList();
+    }
+
+    return filtered;
   }
 
   Future<void> fetchProducts() async {
@@ -62,6 +78,12 @@ class ProductProvider extends ChangeNotifier {
 
   void changeCategory(String category) {
     _selectedCategory = category;
+
+    notifyListeners();
+  }
+
+  void searchProducts(String query) {
+    _searchQuery = query;
 
     notifyListeners();
   }
