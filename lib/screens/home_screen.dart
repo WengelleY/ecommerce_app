@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
-
+import '../providers/CartProvider.dart';
 import '../providers/product_provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +24,52 @@ class _HomeScreenState extends State<HomeScreen> {
     final productProvider = context.watch<ProductProvider>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Products")),
+      appBar: AppBar(
+        title: const Text("Products"),
+
+        actions: [
+          Consumer<CartProvider>(
+            builder: (context, cartProvider, child) {
+              return Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+
+                    onPressed: () {
+                      context.push('/cart');
+                    },
+                  ),
+
+                  if (cartProvider.cartItems.isNotEmpty)
+                    Positioned(
+                      right: 5,
+
+                      top: 5,
+
+                      child: Container(
+                        padding: const EdgeInsets.all(4),
+
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.red,
+                        ),
+
+                        child: Text(
+                          cartProvider.cartItems.length.toString(),
+
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
 
       body: Column(
         children: [

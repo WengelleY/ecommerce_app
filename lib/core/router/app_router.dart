@@ -3,6 +3,7 @@ import '../../models/product.dart';
 import '../../screens/login_screen.dart';
 import '../../screens/home_screen.dart';
 import '../../screens/product_details_screen.dart';
+import '../../screens/cart_screen.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/login',
@@ -31,5 +32,7 @@ final GoRouter appRouter = GoRouter(
         return ProductDetailsScreen(product: product);
       },
     ),
+
+    GoRoute(path: '/cart', builder: (context, state) => const CartScreen()),
   ],
 );

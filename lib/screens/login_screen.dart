@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce_app/screens/home_screen.dart';
 import '../providers/auth_provider.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -66,12 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
 
                       if (authProvider.token != null) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
-                          ),
-                        );
+                        context.pushReplacement('/home');
                       }
                     },
 
