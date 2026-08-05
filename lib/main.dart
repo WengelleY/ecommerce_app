@@ -5,6 +5,7 @@ import 'providers/auth_provider.dart';
 import 'providers/product_provider.dart';
 
 import 'core/router/app_router.dart';
+import 'providers/CartProvider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: authProvider),
 
         ChangeNotifierProvider(create: (_) => ProductProvider()),
+
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
 
       child: MaterialApp.router(
