@@ -16,52 +16,79 @@ class ProductDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Product Details")),
 
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
 
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
 
-          children: [
-            Image.network(
-              product.image,
-              height: 250,
-              width: double.infinity,
-              fit: BoxFit.contain,
-            ),
+            children: [
+              Center(
+                child: Image.network(
+                  product.image,
 
-            const SizedBox(height: 20),
+                  height: 280,
 
-            Text(
-              product.title,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-
-            const SizedBox(height: 10),
-
-            Text(
-              "\$${product.price}",
-              style: const TextStyle(fontSize: 20, color: Colors.green),
-            ),
-
-            const SizedBox(height: 20),
-
-            SizedBox(
-              width: double.infinity,
-
-              child: ElevatedButton(
-                onPressed: () {
-                  cartProvider.addToCart(product);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Added to cart")),
-                  );
-                },
-
-                child: const Text("Add to Cart"),
+                  fit: BoxFit.contain,
+                ),
               ),
-            ),
-          ],
+
+              const SizedBox(height: 25),
+
+              Text(
+                product.title,
+
+                style: const TextStyle(
+                  fontSize: 22,
+
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 15),
+
+              Text(
+                "\$${product.price}",
+
+                style: const TextStyle(
+                  fontSize: 24,
+
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              Text(
+                product.category.toUpperCase(),
+
+                style: const TextStyle(fontSize: 16),
+              ),
+
+              const SizedBox(height: 30),
+
+              SizedBox(
+                width: double.infinity,
+
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    cartProvider.addToCart(product);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Added to cart"),
+                        duration: Duration(seconds: 1),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.shopping_cart),
+
+                  label: const Text("Add to Cart"),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

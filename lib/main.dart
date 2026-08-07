@@ -6,6 +6,7 @@ import 'providers/product_provider.dart';
 import 'providers/user_provider.dart';
 import 'core/router/app_router.dart';
 import 'providers/CartProvider.dart';
+import 'core/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
 
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
+        theme: AppTheme.theme,
         title: "E-Commerce App",
         routerConfig: appRouter,
       ),

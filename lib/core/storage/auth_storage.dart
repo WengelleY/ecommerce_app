@@ -12,4 +12,10 @@ class AuthStorage {
 
     return prefs.getString("token");
   }
+
+  Future<void> removeToken() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.remove("token");
+  }
 }

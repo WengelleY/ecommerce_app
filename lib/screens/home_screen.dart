@@ -88,7 +88,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: TextField(
               decoration: const InputDecoration(
                 hintText: "Search products...",
+
                 prefixIcon: Icon(Icons.search),
+
                 border: OutlineInputBorder(),
               ),
 
@@ -175,29 +177,33 @@ class _HomeScreenState extends State<HomeScreen> {
           },
 
           child: Card(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(12),
 
             child: Padding(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(16),
 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
 
                 children: [
-                  Image.network(
-                    product.image,
+                  Center(
+                    child: Image.network(
+                      product.image,
 
-                    height: 180,
+                      height: 180,
 
-                    width: double.infinity,
-
-                    fit: BoxFit.contain,
+                      fit: BoxFit.contain,
+                    ),
                   ),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 15),
 
                   Text(
                     product.title,
+
+                    maxLines: 2,
+
+                    overflow: TextOverflow.ellipsis,
 
                     style: const TextStyle(
                       fontSize: 18,
@@ -206,12 +212,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 10),
 
                   Text(
                     "\$${product.price}",
 
-                    style: const TextStyle(fontSize: 16, color: Colors.green),
+                    style: const TextStyle(
+                      fontSize: 17,
+
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),

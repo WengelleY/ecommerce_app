@@ -45,4 +45,12 @@ class AuthProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  Future<void> logout() async {
+    _token = null;
+
+    await _authStorage.removeToken();
+
+    notifyListeners();
+  }
 }

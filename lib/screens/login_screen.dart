@@ -33,47 +33,70 @@ class _LoginScreenState extends State<LoginScreen> {
       appBar: AppBar(title: const Text("Login")),
 
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(24),
 
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+
           children: [
+            const Icon(Icons.shopping_bag, size: 90),
+
+            const SizedBox(height: 30),
+
             TextField(
               controller: usernameController,
 
-              decoration: const InputDecoration(labelText: "Username"),
+              decoration: const InputDecoration(
+                labelText: "Username",
+                prefixIcon: Icon(Icons.person),
+              ),
             ),
+
+            const SizedBox(height: 15),
 
             TextField(
               controller: passwordController,
 
               obscureText: true,
 
-              decoration: const InputDecoration(labelText: "Password"),
+              decoration: const InputDecoration(
+                labelText: "Password",
+                prefixIcon: Icon(Icons.lock),
+              ),
             ),
 
             const SizedBox(height: 20),
 
-            // Error message
             if (authProvider.errorMessage != null)
-              Text(authProvider.errorMessage!),
+              Text(
+                authProvider.errorMessage!,
 
-            ElevatedButton(
-              onPressed: authProvider.isLoading
-                  ? null
-                  : () async {
-                      await context.read<AuthProvider>().login(
-                        usernameController.text,
-                        passwordController.text,
-                      );
+                style: const TextStyle(color: Color(0xff8B5E3C)),
+              ),
 
-                      if (authProvider.token != null) {
-                        context.pushReplacement('/home');
-                      }
-                    },
+            const SizedBox(height: 20),
 
-              child: authProvider.isLoading
-                  ? const CircularProgressIndicator()
-                  : const Text("Login"),
+            SizedBox(
+              width: double.infinity,
+
+              child: ElevatedButton(
+                onPressed: authProvider.isLoading
+                    ? null
+                    : () async {
+                        await context.read<AuthProvider>().login(
+                          usernameController.text,
+                          passwordController.text,
+                        );
+
+                        if (authProvider.token != null) {
+                          context.go('/home');
+                        }
+                      },
+
+                child: authProvider.isLoading
+                    ? const CircularProgressIndicator()
+                    : const Text("Login"),
+              ),
             ),
           ],
         ),
