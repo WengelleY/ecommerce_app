@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const SizedBox(height: 10),
 
                   Text(
-                    "\$${product.price}",
+                    "\$${product.price.toStringAsFixed(2)}",
 
                     style: const TextStyle(
                       fontSize: 17,

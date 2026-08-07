@@ -91,7 +91,9 @@ class CartScreen extends StatelessWidget {
 
                                     const SizedBox(height: 8),
 
-                                    Text("\$${product.price}"),
+                                    Text(
+                                      "\$${product.price.toStringAsFixed(2)}",
+                                    ),
 
                                     Row(
                                       children: [
