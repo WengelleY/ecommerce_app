@@ -22,4 +22,14 @@ class Product {
       category: json['category'] ?? "unknown",
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'price': price,
+      'image': image,
+      'category': category,
+    };
+  }
 }

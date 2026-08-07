@@ -16,7 +16,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
 
-    context.read<ProductProvider>().fetchProducts();
+    Future.microtask(() {
+      context.read<ProductProvider>().fetchProducts();
+    });
   }
 
   @override

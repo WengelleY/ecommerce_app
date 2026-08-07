@@ -30,14 +30,12 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(create: (_) => ProductProvider()),
 
-        ChangeNotifierProvider(create: (_) => CartProvider()),
+        ChangeNotifierProvider(create: (_) => CartProvider()..loadCart()),
       ],
 
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-
         title: "E-Commerce App",
-
         routerConfig: appRouter,
       ),
     );
