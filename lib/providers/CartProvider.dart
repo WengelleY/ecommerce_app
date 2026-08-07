@@ -37,4 +37,32 @@ class CartProvider extends ChangeNotifier {
 
     return total;
   }
+
+  void increaseQuantity(Product product) {
+    final index = _cartItems.indexWhere(
+      (item) => item.product.id == product.id,
+    );
+
+    if (index != -1) {
+      _cartItems[index].quantity++;
+
+      notifyListeners();
+    }
+  }
+
+  void decreaseQuantity(Product product) {
+    final index = _cartItems.indexWhere(
+      (item) => item.product.id == product.id,
+    );
+
+    if (index != -1) {
+      if (_cartItems[index].quantity > 1) {
+        _cartItems[index].quantity--;
+      } else {
+        _cartItems.removeAt(index);
+      }
+
+      notifyListeners();
+    }
+  }
 }

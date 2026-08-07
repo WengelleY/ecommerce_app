@@ -44,15 +44,52 @@ class CartScreen extends StatelessWidget {
                     itemCount: cartProvider.cartItems.length,
 
                     itemBuilder: (context, index) {
-                      final product = cartProvider.cartItems[index];
+                      final cartItem = cartProvider.cartItems[index];
 
+                      final product = cartItem.product;
                       return ListTile(
                         leading: Image.network(product.image, width: 50),
 
                         title: Text(product.title),
 
-                        subtitle: Text("\$${product.price}"),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
 
+                          children: [
+                            Text("\$${product.price}"),
+
+                            const SizedBox(height: 8),
+
+                            Row(
+                              children: [
+                                IconButton(
+                                  onPressed: () {
+                                    cartProvider.decreaseQuantity(product);
+                                  },
+
+                                  icon: const Icon(Icons.remove_circle_outline),
+                                ),
+
+                                Text(
+                                  cartItem.quantity.toString(),
+
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                                IconButton(
+                                  onPressed: () {
+                                    cartProvider.increaseQuantity(product);
+                                  },
+
+                                  icon: const Icon(Icons.add_circle_outline),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
 
