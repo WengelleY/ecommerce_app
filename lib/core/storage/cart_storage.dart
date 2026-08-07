@@ -11,8 +11,6 @@ class CartStorage {
     final cartJson = cartItems.map((item) => item.toJson()).toList();
 
     final cartString = jsonEncode(cartJson);
-    print("SAVED CART:");
-    print(cartString);
 
     await prefs.setString("cart", cartString);
   }
@@ -21,8 +19,6 @@ class CartStorage {
     final prefs = await SharedPreferences.getInstance();
 
     final cartString = prefs.getString("cart");
-    print("LOADED CART:");
-    print(cartString);
 
     if (cartString == null) {
       return [];

@@ -30,6 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text("Products"),
 
         actions: [
+          IconButton(
+            icon: const Icon(Icons.person),
+
+            onPressed: () {
+              context.push('/profile');
+            },
+          ),
+
           Consumer<CartProvider>(
             builder: (context, cartProvider, child) {
               return Stack(
@@ -45,7 +53,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   if (cartProvider.cartItems.isNotEmpty)
                     Positioned(
                       right: 5,
-
                       top: 5,
 
                       child: Container(
