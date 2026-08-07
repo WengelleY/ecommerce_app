@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         itemBuilder: (context, index) {
           final category = categories[index];
-
+          final isSelected = productProvider.selectedCategory == category;
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
 
@@ -136,7 +136,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 productProvider.changeCategory(category);
               },
 
-              child: Text(category),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: isSelected
+                    ? const Color(0xff4A2C1B)
+                    : const Color(0xffD7B899),
+
+                foregroundColor: isSelected
+                    ? Colors.white
+                    : const Color(0xff4A2C1B),
+              ),
+
+              child: Text(category.toUpperCase()),
             ),
           );
         },
