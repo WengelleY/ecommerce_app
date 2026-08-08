@@ -5,11 +5,18 @@ import '../../screens/home_screen.dart';
 import '../../screens/product_details_screen.dart';
 import '../../screens/cart_screen.dart';
 import '../../screens/profile_screen.dart';
+import '../../screens/intro_screen.dart';
 
 final GoRouter appRouter = GoRouter(
-  initialLocation: '/login',
+  initialLocation: '/splash',
 
   routes: [
+    GoRoute(
+      path: '/splash',
+      builder: (context, state) {
+        return const SplashScreen();
+      },
+    ),
     GoRoute(
       path: '/login',
       builder: (context, state) {
